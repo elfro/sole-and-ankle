@@ -41,11 +41,9 @@ const Nav = styled.nav`
     justify-content: center;
     align-content: center;
     gap: 48px;
-
 `;
 
 const NavLink = styled.a`
-
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;

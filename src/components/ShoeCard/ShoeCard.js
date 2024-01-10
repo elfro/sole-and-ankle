@@ -82,7 +82,7 @@ const Flag = styled.div`
   right: -4px;
   padding: 7px 10px;
   width: fit-content;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: ${WEIGHTS.bold};
   color: ${COLORS.white};
   background-color: ${COLORS.primary};
