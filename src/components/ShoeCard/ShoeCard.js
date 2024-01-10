@@ -36,9 +36,8 @@ const ShoeCard = ({
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
-          {variant !== 'default' && <Flag style={{
-            'backgroundColor': variant === 'on-sale' ? COLORS.primary : COLORS.secondary
-          }}>{variant === 'on-sale' ? 'Sale' : 'Just Released!'}</Flag>}
+          {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
+          {variant === 'new-release' && <NewReleaseFlag>Just Released!</NewReleaseFlag>}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
@@ -50,7 +49,7 @@ const ShoeCard = ({
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
-          {salePrice && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
+          {variant === 'on-sale' && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
         </Row>
       </Wrapper>
     </Link>
@@ -85,9 +84,17 @@ const Flag = styled.div`
   font-size: 0.875rem;
   font-weight: ${WEIGHTS.bold};
   color: ${COLORS.white};
-  background-color: ${COLORS.primary};
+  background-color: white;
   border-radius: 2px;
 `
+
+const SaleFlag = styled(Flag)`
+  background-color: ${COLORS.primary};
+`;
+
+const NewReleaseFlag = styled(Flag)`
+  background-color: ${COLORS.secondary};
+`;
 
 const Row = styled.div`
   display: flex;
