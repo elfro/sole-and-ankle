@@ -57,6 +57,7 @@ const MainColumn = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  max-width: 1845px;
 `;
 
 const Header = styled.header`
