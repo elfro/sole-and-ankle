@@ -36,14 +36,21 @@ const ShoeCard = ({
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
+          {variant !== 'default' && <Flag style={{
+            'backgroundColor': variant === 'on-sale' ? COLORS.primary : COLORS.secondary
+          }}>{variant === 'on-sale' ? 'Sale' : 'Just Released!'}</Flag>}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price variant={variant} style={{
+            '--color': variant === 'on-sale' ? COLORS.gray[700] : 'inherit',
+            '--textDecoration': variant === 'on-sale' ? 'line-through' : 'none',
+          }}>{formatPrice(price)}</Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          {salePrice && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
         </Row>
       </Wrapper>
     </Link>
@@ -53,17 +60,38 @@ const ShoeCard = ({
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
+  max-width: 340px;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  margin-bottom: 36px;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+  border-radius: 16px 16px 4px 4px;
+`;
+
+const Flag = styled.div`
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  padding: 7px 10px;
+  width: fit-content;
+  font-size: 0.875rem;
+  font-weight: ${WEIGHTS.bold};
+  color: ${COLORS.white};
+  background-color: ${COLORS.primary};
+  border-radius: 2px;
+`
 
 const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-size: 1rem;
 `;
 
@@ -72,7 +100,11 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  font-weight: ${WEIGHTS.normal};
+  color: var(--color);
+  text-decoration: var(--textDecoration);
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
